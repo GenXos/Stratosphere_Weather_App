@@ -13,6 +13,9 @@
 		5FD111451C711B550020B6AD /* StratosphereWeatherApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5FD111431C711B550020B6AD /* StratosphereWeatherApp.xcdatamodeld */; };
 		5FD111471C711B550020B6AD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5FD111461C711B550020B6AD /* Assets.xcassets */; };
 		5FD1114A1C711B550020B6AD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5FD111481C711B550020B6AD /* LaunchScreen.storyboard */; };
+		5FD111551C711DAC0020B6AD /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FD111541C711DAC0020B6AD /* Weather.swift */; };
+		5FD111581C7124610020B6AD /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FD111571C7124610020B6AD /* Constants.swift */; };
+		6815279D58C84D942124FD13 /* Pods_StratosphereWeatherApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F23D4E608C8A551C4D8E0883 /* Pods_StratosphereWeatherApp.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +27,11 @@
 		5FD111461C711B550020B6AD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5FD111491C711B550020B6AD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5FD1114B1C711B550020B6AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5FD111541C711DAC0020B6AD /* Weather.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
+		5FD111571C7124610020B6AD /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		90CBC1D09B84019C013556BD /* Pods-StratosphereWeatherApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StratosphereWeatherApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-StratosphereWeatherApp/Pods-StratosphereWeatherApp.release.xcconfig"; sourceTree = "<group>"; };
+		9108CF2FA6BB0B34D2702942 /* Pods-StratosphereWeatherApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StratosphereWeatherApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StratosphereWeatherApp/Pods-StratosphereWeatherApp.debug.xcconfig"; sourceTree = "<group>"; };
+		F23D4E608C8A551C4D8E0883 /* Pods_StratosphereWeatherApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StratosphereWeatherApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +39,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6815279D58C84D942124FD13 /* Pods_StratosphereWeatherApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		305D180197C6BF79D0AF4541 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F23D4E608C8A551C4D8E0883 /* Pods_StratosphereWeatherApp.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		5FD111301C711B550020B6AD = {
 			isa = PBXGroup;
 			children = (
 				5FD1113B1C711B550020B6AD /* StratosphereWeatherApp */,
 				5FD1113A1C711B550020B6AD /* Products */,
+				CAC3EA41F590BD0250077DA6 /* Pods */,
+				305D180197C6BF79D0AF4541 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,15 +75,58 @@
 		5FD1113B1C711B550020B6AD /* StratosphereWeatherApp */ = {
 			isa = PBXGroup;
 			children = (
+				5FD111531C711BA20020B6AD /* Model */,
+				5FD111521C711B9B0020B6AD /* View */,
+				5FD111511C711B8E0020B6AD /* Controller */,
+				5FD111561C71243C0020B6AD /* Util */,
 				5FD1113C1C711B550020B6AD /* AppDelegate.swift */,
-				5FD1113E1C711B550020B6AD /* ViewController.swift */,
-				5FD111401C711B550020B6AD /* Main.storyboard */,
 				5FD111461C711B550020B6AD /* Assets.xcassets */,
 				5FD111481C711B550020B6AD /* LaunchScreen.storyboard */,
 				5FD1114B1C711B550020B6AD /* Info.plist */,
 				5FD111431C711B550020B6AD /* StratosphereWeatherApp.xcdatamodeld */,
 			);
 			path = StratosphereWeatherApp;
+			sourceTree = "<group>";
+		};
+		5FD111511C711B8E0020B6AD /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				5FD1113E1C711B550020B6AD /* ViewController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		5FD111521C711B9B0020B6AD /* View */ = {
+			isa = PBXGroup;
+			children = (
+				5FD111401C711B550020B6AD /* Main.storyboard */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		5FD111531C711BA20020B6AD /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				5FD111541C711DAC0020B6AD /* Weather.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		5FD111561C71243C0020B6AD /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				5FD111571C7124610020B6AD /* Constants.swift */,
+			);
+			name = Util;
+			sourceTree = "<group>";
+		};
+		CAC3EA41F590BD0250077DA6 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				9108CF2FA6BB0B34D2702942 /* Pods-StratosphereWeatherApp.debug.xcconfig */,
+				90CBC1D09B84019C013556BD /* Pods-StratosphereWeatherApp.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -74,9 +136,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5FD1114E1C711B550020B6AD /* Build configuration list for PBXNativeTarget "StratosphereWeatherApp" */;
 			buildPhases = (
+				AF0971CC65788CA5DD0C46E1 /* Check Pods Manifest.lock */,
 				5FD111351C711B550020B6AD /* Sources */,
 				5FD111361C711B550020B6AD /* Frameworks */,
 				5FD111371C711B550020B6AD /* Resources */,
+				959018B5D7AB6AAEC9F233B0 /* Embed Pods Frameworks */,
+				3F0C1CA1969E3BBB25D6E282 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -99,6 +164,7 @@
 				TargetAttributes = {
 					5FD111381C711B550020B6AD = {
 						CreatedOnToolsVersion = 7.2.1;
+						DevelopmentTeam = URHD54K7Z6;
 					};
 				};
 			};
@@ -133,11 +199,61 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		3F0C1CA1969E3BBB25D6E282 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StratosphereWeatherApp/Pods-StratosphereWeatherApp-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		959018B5D7AB6AAEC9F233B0 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StratosphereWeatherApp/Pods-StratosphereWeatherApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AF0971CC65788CA5DD0C46E1 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		5FD111351C711B550020B6AD /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5FD111581C7124610020B6AD /* Constants.swift in Sources */,
+				5FD111551C711DAC0020B6AD /* Weather.swift in Sources */,
 				5FD1113F1C711B550020B6AD /* ViewController.swift in Sources */,
 				5FD1113D1C711B550020B6AD /* AppDelegate.swift in Sources */,
 				5FD111451C711B550020B6AD /* StratosphereWeatherApp.xcdatamodeld in Sources */,
@@ -251,8 +367,10 @@
 		};
 		5FD1114F1C711B550020B6AD /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9108CF2FA6BB0B34D2702942 /* Pods-StratosphereWeatherApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = StratosphereWeatherApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.skullgate.StratosphereWeatherApp;
@@ -262,8 +380,10 @@
 		};
 		5FD111501C711B550020B6AD /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 90CBC1D09B84019C013556BD /* Pods-StratosphereWeatherApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = StratosphereWeatherApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.skullgate.StratosphereWeatherApp;
@@ -290,6 +410,7 @@
 				5FD111501C711B550020B6AD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
