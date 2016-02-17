@@ -11,6 +11,25 @@ import Alamofire
 
 class Weather {
     
+    enum WindDirection {
+        case N
+        case NNE
+        case NE
+        case ENE
+        case E
+        case ESE
+        case SE
+        case SSE
+        case S
+        case SSW
+        case SW
+        case WSW
+        case W
+        case WNW
+        case NW
+        case NNW
+    }
+    
     private var _cityId: Int!
     private var _cityName: String!
     private var _overview: String!
@@ -19,7 +38,7 @@ class Weather {
     private var _pressure: String!
     private var _humidity: String!
     private var _windSpeed: String!
-    private var _windDirection: String!
+    private var _windDirection: WindDirection!
     private var _sunrise: String!
     private var _sunset: String!
     
@@ -77,9 +96,9 @@ class Weather {
     
     var windDirection: String {
         if _windDirection == nil {
-            _windDirection = ""
+            _windDirection = WindDirection.N
         }
-        return _windDirection
+        return "\(_windDirection)"
     }
     
     var sunrise: String {
@@ -102,6 +121,17 @@ class Weather {
         self._cityName = cityName
         
         _weatherURL = "\(URL_BASE)\(URL_CURRENT_WEATHER)?q=\(self.cityName)&units=metric&APPID=\(API_KEY)"
+    }
+    
+    func getTimeFromEpoch(rawDate: String) -> String {
+        
+        let epochValue = NSTimeInterval(Int(rawDate)!)
+        let myDate = NSDate(timeIntervalSince1970: epochValue)
+        let formatter = NSDateFormatter()
+        formatter.timeStyle = NSDateFormatterStyle.ShortStyle
+        let dateString = formatter.stringFromDate(myDate)
+        
+        return "\(dateString)"
     }
     
     func downloadWeatherDetails(completed: DownloadComplete) {
@@ -127,29 +157,22 @@ class Weather {
                 
                 if let sys = dict["sys"] as? NSDictionary {
                     if let sunrise = sys["sunrise"] {
-                        let epochValue = NSTimeInterval(Int(sunrise.stringValue)!)
-                        let myDate = NSDate(timeIntervalSince1970: epochValue)
-                        let formatter = NSDateFormatter()
-                        formatter.timeStyle = NSDateFormatterStyle.ShortStyle
-                        let dateString = formatter.stringFromDate(myDate)
-                        self._sunrise = "\(dateString)"
-                        print("Sunrise: \(dateString)")
+
+                        self._sunrise = self.getTimeFromEpoch(sunrise.stringValue)
+                        print("Sunrise: \(self.sunrise)")
                     }
                     if let sunset = sys["sunset"] {
-                        let epochValue = NSTimeInterval(Int(sunset.stringValue)!)
-                        let myDate = NSDate(timeIntervalSince1970: epochValue)
-                        let formatter = NSDateFormatter()
-                        formatter.timeStyle = NSDateFormatterStyle.ShortStyle
-                        let dateString = formatter.stringFromDate(myDate)
-                        self._sunset = "\(dateString)"
-                        print("Sunset: \(dateString)")
+
+                        self._sunset = self.getTimeFromEpoch(sunset.stringValue)
+                        print("Sunset: \(self._sunset)")
                     }
                 }
                 
-                if let weather = dict["weather"] as? NSDictionary {
-                    if let description = weather["description"] {
-                        self._description = "\(description.stringValue)"
-                        print(self.description)
+                if let weather = dict["weather"] as? [Dictionary<String, AnyObject>] where weather.count > 0 {
+                    
+                    if let description = weather[0]["description"] as? String {
+                    
+                        self._description = description
                         print(description)
                     }
                 }
@@ -161,40 +184,43 @@ class Weather {
                     if let windDir = wind["deg"] {
                         let windTmp = Double(windDir.stringValue)!
                         print(windTmp)
-                        if windTmp > 0.0 && windTmp <= 11.25 {
-                            self._windDirection = "N"
-                        } else if windTmp > 11.25 && windTmp <= 33.75 {
-                            self._windDirection = "NNE"
-                        } else if windTmp > 33.75 && windTmp <= 56.25 {
-                            self._windDirection = "NE"
-                        } else if windTmp > 56.25 && windTmp <= 78.75 {
-                            self._windDirection = "ENE"
-                        } else if windTmp > 78.75 && windTmp <= 101.25 {
-                            self._windDirection = "E"
-                        } else if windTmp > 101.25 && windTmp <= 123.75 {
-                            self._windDirection = "ESE"
-                        } else if windTmp > 123.75 && windTmp <= 146.25 {
-                            self._windDirection = "SE"
-                        } else if windTmp > 146.25 && windTmp <= 168.75 {
-                            self._windDirection = "SSE"
-                        } else if windTmp > 168.75 && windTmp <= 191.25 {
-                            self._windDirection = "S"
-                        } else if windTmp > 191.25 && windTmp <= 213.75 {
-                            self._windDirection = "SSW"
-                        } else if windTmp > 213.75 && windTmp <= 236.25 {
-                            self._windDirection = "SW"
-                        } else if windTmp > 236.25 && windTmp <= 258.75 {
-                            self._windDirection = "WSW"
-                        } else if windTmp > 258.75 && windTmp <= 281.25 {
-                            self._windDirection = "W"
-                        } else if windTmp > 281.25 && windTmp <= 303.75 {
-                            self._windDirection = "WNW"
-                        } else if windTmp > 303.75 && windTmp <= 326.25 {
-                            self._windDirection = "NW"
-                        } else if windTmp > 326.25 && windTmp <= 348.75 {
-                            self._windDirection = "NNW"
-                        } else if windTmp > 348.75 && windTmp <= 360.0 {
-                            self._windDirection = "N"
+                        switch (windTmp) {
+                        case 348.75...360:
+                            self._windDirection = WindDirection.N
+                        case 0..<11.25:
+                            self._windDirection = WindDirection.N
+                        case 11.25..<33.75:
+                            self._windDirection = WindDirection.NNE
+                        case 33.75..<56.25:
+                            self._windDirection = WindDirection.NE
+                        case 56.25..<78.75:
+                            self._windDirection = WindDirection.ENE
+                        case 78.75..<101.25:
+                            self._windDirection = WindDirection.E
+                        case 101.25..<123.75:
+                            self._windDirection = WindDirection.ESE
+                        case 123.75..<146.25:
+                            self._windDirection = WindDirection.SE
+                        case 146.25..<168.75:
+                            self._windDirection = WindDirection.SSE
+                        case 168.75..<191.25:
+                            self._windDirection = WindDirection.S
+                        case 191.25..<213.75:
+                            self._windDirection = WindDirection.SSW
+                        case 213.75..<236.25:
+                            self._windDirection = WindDirection.SW
+                        case 236.25..<258.75:
+                            self._windDirection = WindDirection.WSW
+                        case 258.75..<281.25:
+                            self._windDirection = WindDirection.W
+                        case 281.25..<303.75:
+                            self._windDirection = WindDirection.WNW
+                        case 303.75..<326.25:
+                            self._windDirection = WindDirection.NW
+                        case 326.25..<348:
+                            self._windDirection = WindDirection.NNW
+                        default:
+                            self._windDirection = WindDirection.N
                         }
                     }
                 }
